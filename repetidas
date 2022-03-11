@@ -1,0 +1,52 @@
+public class Utility {
+    static String[] Repeated(String text) {
+        int repeated = 0, mostRepeated = 0;
+        String[] arrayText;
+        String[] arrayWords;
+        String[] mostRepeatedWord = new String[2];
+        text = RefactorText(text);
+        int numberWords = NumberWords(text);
+        arrayText = FillText(text, numberWords);
+        arrayWords = FillWords(text, numberWords);
+        for (String words : arrayWords) {
+            for (String wordsText : arrayText) {
+                if (words.equals(wordsText)){
+                    repeated++;
+                }
+            }
+            if (repeated > mostRepeated) {
+                mostRepeated = repeated;
+                mostRepeatedWord[0] = words;
+                mostRepeatedWord[1] = String.valueOf(mostRepeated);
+            }
+            repeated = 0;
+        }
+        return mostRepeatedWord;
+    }
+
+    static String[] RepeatedWords(String text) {
+        int repeated = 0, posArrayRepeatedWords = 0;
+        String[] arrayText;
+        String[] arrayWords;
+
+        text = RefactorText(text);
+        int numberWords = NumberWords(text);
+        arrayText = FillText(text, numberWords);
+        arrayWords = FillWords(text, numberWords);
+
+        String[] mostRepeatedWords = new String[arrayWords.length*2];
+
+        for (String word : arrayWords) {
+            for (String wordsText : arrayText) {
+                if (word.equals(wordsText)){
+                    repeated++;
+                }
+            }
+            mostRepeatedWords[posArrayRepeatedWords] = word;
+            mostRepeatedWords[posArrayRepeatedWords+1] = String.valueOf(repeated);
+            posArrayRepeatedWords +=2;
+            repeated = 0;
+        }
+        return mostRepeatedWords;
+    }
+}
